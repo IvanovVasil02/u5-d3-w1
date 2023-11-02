@@ -12,16 +12,15 @@ import java.util.List;
 @ToString
 @Getter
 public class Order {
+  protected List<OrderProduct> order;
   private int ordernumber;
   private int tableNumber;
-  private List<OrderProduct> order;
   private OrderStatus orderStatus;
   private int coversNumber;
   private LocalTime time;
   private double totalAmount;
   @Value("${cost.covered}")
   private int cover;
-
 
   public Order(Table table, List<OrderProduct> order, OrderStatus orderStatus, int coversNumber) {
     this.ordernumber = (int) Math.floor(Math.random() * 101);
@@ -33,8 +32,13 @@ public class Order {
     this.totalAmount = Math.floor(getAmount());
   }
 
+  public List<OrderProduct> getOrder() {
+    return order;
+  }
+
   public double getAmount() {
     return this.order.stream().mapToDouble(OrderProduct::getPrice).sum() + (this.cover * coversNumber);
   }
+
 
 }

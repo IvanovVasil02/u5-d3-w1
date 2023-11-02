@@ -4,7 +4,8 @@ import ivanovvasil.u5d2w1.entities.Pizza;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,19 +32,11 @@ public class PizzaTest {
     ctx.close();
   }
 
-  @Test
-  public void testmargheritaNotNull() {
-    assertNotNull(margheritaPizza);
+  @ParameterizedTest
+  @ValueSource(strings = {"margheritaPizza", "hawaiianPizza", "salamiPizza"})
+  public void testpizzasNotNull(String pizza) {
+    assertNotNull(pizza);
   }
 
-  @Test
-  public void testhawaiianNotNull() {
-    assertNotNull(hawaiianPizza);
-  }
-
-  @Test
-  public void testsalamiNotNull() {
-    assertNotNull(salamiPizza);
-  }
 
 }
